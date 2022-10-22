@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import backgroundImage from "../../assets/Background.png";
+import backgroundImage from '../../assets/Background.png';
 
 export const HomeContainer = styled.main`
   overflow: visible;
@@ -9,7 +9,6 @@ export const HomeContainer = styled.main`
 export const MainContainer = styled.main`
   display: flex;
   justify-content: space-between;
-
   padding-top: 94px;
   overflow: visible;
 `;
@@ -66,6 +65,10 @@ export const ItemContainer = styled.div<ItemContainerProps>`
     padding: 8px;
     background-color: ${(props) => props.theme[ITEM_COLOR[props.itemColor]]};
   }
+`;
+
+export const PageCover = styled.div`
+  @media;
 `;
 
 export const ProductsSectionContainer = styled.div`

@@ -1,40 +1,25 @@
+import { Coffee, Minus, Package, Plus, ShoppingCart, Timer } from 'phosphor-react';
+
+import americano from '../../assets/coffeeTypes/americano.svg';
+import arabe from '../../assets/coffeeTypes/arabe.svg';
+import cafeComLeite from '../../assets/coffeeTypes/cafeComLeite.svg';
+import cafeGelado from '../../assets/coffeeTypes/cafeGelado.svg';
+import capuccino from '../../assets/coffeeTypes/capuccino.svg';
+import chocolateQuente from '../../assets/coffeeTypes/chocolateQuente.svg';
+import cubano from '../../assets/coffeeTypes/cubano.svg';
+import expresso from '../../assets/coffeeTypes/expresso.svg';
+import expressoCremoso from '../../assets/coffeeTypes/expressoCremoso.svg';
+import havaiano from '../../assets/coffeeTypes/havaiano.svg';
+import irlandes from '../../assets/coffeeTypes/irlandes.svg';
+import latte from '../../assets/coffeeTypes/latte.svg';
+import macchiato from '../../assets/coffeeTypes/macchiato.svg';
+import mochaccino from '../../assets/coffeeTypes/mochaccino.svg';
+import coverImage from '../../assets/Imagem.png';
+import { ProductComponent } from '../../components/Product';
 import {
-  Timer,
-  ShoppingCart,
-  Package,
-  Coffee,
-  Plus,
-  Minus,
-} from "phosphor-react";
-
-import coverImage from "../../assets/Imagem.png";
-
-import americano from "../../assets/coffeeTypes/americano.svg";
-import arabe from "../../assets/coffeeTypes/arabe.svg";
-import cafeComLeite from "../../assets/coffeeTypes/cafeComLeite.svg";
-import cafeGelado from "../../assets/coffeeTypes/cafeGelado.svg";
-import capuccino from "../../assets/coffeeTypes/capuccino.svg";
-import chocolateQuente from "../../assets/coffeeTypes/chocolateQuente.svg";
-import cubano from "../../assets/coffeeTypes/cubano.svg";
-import expresso from "../../assets/coffeeTypes/expresso.svg";
-import expressoCremoso from "../../assets/coffeeTypes/expressoCremoso.svg";
-import havaiano from "../../assets/coffeeTypes/havaiano.svg";
-import irlandes from "../../assets/coffeeTypes/irlandes.svg";
-import latte from "../../assets/coffeeTypes/latte.svg";
-import macchiato from "../../assets/coffeeTypes/macchiato.svg";
-import mochaccino from "../../assets/coffeeTypes/mochaccino.svg";
-
-import {
-  ContentContainer,
-  HomeContainer,
-  TitleContainer,
-  ItemsContainer,
-  ItemContainer,
-  MainContainer,
-  ProductsSectionContainer,
-  ProductsContainer,
-} from "./style";
-import { ProductComponent } from "../../components/Product";
+    ContentContainer, HomeContainer, ItemContainer, ItemsContainer, MainContainer, PageCover,
+    ProductsContainer, ProductsSectionContainer, TitleContainer
+} from './style';
 
 enum coffeeTypes {
   ESPECIAL = "ESPECIAL",
@@ -197,9 +182,9 @@ export function Home() {
             </ItemContainer>
           </ItemsContainer>
         </ContentContainer>
-        <div id="cover">
+        <PageCover id="cover">
           <img src={coverImage} />
-        </div>
+        </PageCover>
       </MainContainer>
       <ProductsSectionContainer>
         <h1>Nossos cafés</h1>
