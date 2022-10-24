@@ -101,8 +101,10 @@ export const CoffeesWrapper = styled.div`
   display: flex;
   gap: 40px;
   flex-direction: column;
+  align-items: center;
   h1 {
     font-family: "Baloo 2";
+    width: 100%;
     font-size: 32px;
     color: ${(props) => props.theme.baseSubtitle};
   }
@@ -110,12 +112,16 @@ export const CoffeesWrapper = styled.div`
 
 export const CoffeesItems = styled.div`
   padding-top: 20px;
-  width: 100%;
+  width: fit-content;
   display: flex;
-  justify-content: start;
+  justify-content: center;
   overflow-x: hidden;
   flex-wrap: wrap;
   gap: 40px 32px;
+
+  @media only screen and (${device.laptopL}) {
+    justify-content: start;
+  }
 `;
 
 export const CoffeeItem = styled.div`

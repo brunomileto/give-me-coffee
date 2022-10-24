@@ -21,7 +21,7 @@ export const Header = () => {
             <span>Porto Alegre, RS</span>
           </NavItemLocation>
         </NavLink>
-        <NavLink to="/">
+        <NavLink to="/checkout">
           <NavItemCart>
             <ShoppingCart size={22} weight="fill" />
           </NavItemCart>
