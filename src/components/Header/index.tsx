@@ -1,31 +1,32 @@
-import { MapPin, ShoppingCart } from "phosphor-react";
-import { NavLink } from "react-router-dom";
+import { MapPin, ShoppingCart } from 'phosphor-react';
+import { NavLink } from 'react-router-dom';
 
-import Logo from "../../assets/Logo.svg";
+import LogoImg from '../../assets/Logo.svg';
 import {
-  CartContainer,
-  HeaderContainer,
-  LocationContainer,
-  NavContainer,
-} from "./styles";
+    HeaderWrapper, LogoImage, MapPimColor, NavItemCart, NavItemLocation, NavItems
+} from './styles';
 
-export function Header() {
+export const Header = () => {
   return (
-    <HeaderContainer id="header-container">
+    <HeaderWrapper>
       <NavLink to="/">
-        <img src={Logo} alt="" />
+        <LogoImage alt="" src={LogoImg} />
       </NavLink>
-      <NavContainer id="nav-container">
-        <LocationContainer>
-          <MapPin weight="fill" size={22} color={"#8047F8"} />
-          <span>Porto Alegre, RS</span>
-        </LocationContainer>
-        <CartContainer>
-          <NavLink to="/checkout">
-            <ShoppingCart weight="fill" size={22} color={"#DBAC2C"} />
-          </NavLink>
-        </CartContainer>
-      </NavContainer>
-    </HeaderContainer>
+      <NavItems>
+        <NavLink to="/">
+          <NavItemLocation>
+            <MapPimColor>
+              <MapPin size={22} weight="fill" />
+            </MapPimColor>
+            <span>Porto Alegre, RS</span>
+          </NavItemLocation>
+        </NavLink>
+        <NavLink to="/">
+          <NavItemCart>
+            <ShoppingCart size={22} weight="fill" />
+          </NavItemCart>
+        </NavLink>
+      </NavItems>
+    </HeaderWrapper>
   );
-}
+};

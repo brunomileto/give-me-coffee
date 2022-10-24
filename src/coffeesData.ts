@@ -1,0 +1,86 @@
+export const coffeesData = [
+  {
+    type: "TRADICIONAL",
+    name: "Expresso Tradicional",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    value: "9.90",
+  },
+  {
+    type: "TRADICIONAL",
+    name: "Expresso Tradicional",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    value: "9.90",
+  },
+  {
+    type: "TRADICIONAL",
+    name: "Expresso Tradicional",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    value: "9.90",
+  },
+  {
+    type: "TRADICIONAL",
+    name: "Expresso Tradicional",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    value: "9.90",
+  },
+  {
+    type: "TRADICIONAL",
+    name: "Expresso Tradicional",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    value: "9.90",
+  },
+  {
+    type: "TRADICIONAL",
+    name: "Expresso Tradicional",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    value: "9.90",
+  },
+  {
+    type: "TRADICIONAL",
+    name: "Expresso Tradicional",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    value: "9.90",
+  },
+  {
+    type: "TRADICIONAL",
+    name: "Expresso Tradicional",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    value: "9.90",
+  },
+  {
+    type: "TRADICIONAL",
+    name: "Expresso Tradicional",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    value: "9.90",
+  },
+  {
+    type: "TRADICIONAL",
+    name: "Expresso Tradicional",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    value: "9.90",
+  },
+  {
+    type: "TRADICIONAL",
+    name: "Expresso Tradicional",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    value: "9.90",
+  },
+  {
+    type: "TRADICIONAL",
+    name: "Expresso Tradicional",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    value: "9.90",
+  },
+  {
+    type: "TRADICIONAL",
+    name: "Expresso Tradicional",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    value: "9.90",
+  },
+  {
+    type: "TRADICIONAL",
+    name: "Expresso Tradicional",
+    description: "O tradicional café feito com água quente e grãos moídos",
+    value: "9.90",
+  },
+] as const;
