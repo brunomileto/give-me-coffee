@@ -35,6 +35,16 @@ export const SuccessWrapper = styled.main`
     flex-direction: column;
     gap: 60px;
   }
+
+  @media only screen and (${device.laptop}) {
+    div#content {
+      flex-direction: row;
+      gap: 80px;
+      img {
+        max-width: 48.38%;
+      }
+    }
+  }
 `;
 
 export const SuccessContentContainerBorder = styled.div`
@@ -51,6 +61,7 @@ export const SuccessContentContainer = styled.div`
   background-color: ${(props) => props.theme.background};
   border-radius: 6px 44px;
   padding: 20px;
+  height: 100%;
 
   @media only screen and (${device.laptop}) {
     padding: 40px;
