@@ -5,7 +5,8 @@ import {
 import americano from '../../assets/coffeeTypes/americano.svg';
 import {
     CheckoutWrapper, Form, FormHeaderWrapper, FormInputs, FormInputsWrapper, FormPaymentTypeWrapper,
-    SelectedCoffee, SelectedCoffeesList, SelectedCoffeesValues, SelectedCoffeeWrapper, SubmitButton
+    SelectedCoffee, SelectedCoffeeContainer, SelectedCoffeesList, SelectedCoffeesValues,
+    SelectedCoffeeWrapper, SubmitButton
 } from './styles';
 
 interface FormHeaderProps {
@@ -69,8 +70,8 @@ export const Checkout = () => {
   return (
     <CheckoutWrapper>
       <Form>
-        <h1>Complete seu pedido</h1>
         <FormInputsWrapper>
+          <h1>Complete seu pedido</h1>
           <FormInputs id="formInputs">
             <FormHeader
               title="Endereço de Entrega"
@@ -127,27 +128,29 @@ export const Checkout = () => {
             </div>
           </FormPaymentTypeWrapper>
         </FormInputsWrapper>
-        <h1>Cafés selecionados</h1>
         <SelectedCoffeeWrapper>
-          <SelectedCoffeesList>
-            <CoffeeSelected />
-            <CoffeeSelected />
-          </SelectedCoffeesList>
-          <SelectedCoffeesValues>
-            <div id="totalItens">
-              <span>Total dos itens</span>
-              <span>R$29,70</span>
-            </div>
-            <div id="deliverTax">
-              <span>Entrega</span>
-              <span>R$3,50</span>
-            </div>
-            <div id="total">
-              <span>Total</span>
-              <span>R$33,20</span>
-            </div>
-          </SelectedCoffeesValues>
-          <SubmitButton type="submit">CONFIRMAR PEDIDO</SubmitButton>
+          <h1>Cafés selecionados</h1>
+          <SelectedCoffeeContainer>
+            <SelectedCoffeesList>
+              <CoffeeSelected />
+              <CoffeeSelected />
+            </SelectedCoffeesList>
+            <SelectedCoffeesValues>
+              <div id="totalItens">
+                <span>Total dos itens</span>
+                <span>R$29,70</span>
+              </div>
+              <div id="deliverTax">
+                <span>Entrega</span>
+                <span>R$3,50</span>
+              </div>
+              <div id="total">
+                <span>Total</span>
+                <span>R$33,20</span>
+              </div>
+            </SelectedCoffeesValues>
+            <SubmitButton type="submit">CONFIRMAR PEDIDO</SubmitButton>
+          </SelectedCoffeeContainer>
         </SelectedCoffeeWrapper>
       </Form>
     </CheckoutWrapper>

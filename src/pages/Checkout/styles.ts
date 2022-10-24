@@ -1,12 +1,17 @@
 import { IconProps } from 'phosphor-react';
 import styled from 'styled-components';
 
+import { device } from '../../styles/themes/default';
+
 export const CheckoutWrapper = styled.main``;
 
 export const FormInputsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  @media only screen and (${device.laptop}) {
+    width: 58.8%;
+  }
 `;
 
 export const Form = styled.form`
@@ -16,6 +21,14 @@ export const Form = styled.form`
   h1 {
     font-size: 18px;
     font-family: "Baloo 2";
+  }
+
+  @media only screen and (${device.laptop}) {
+    flex-direction: row;
+  }
+
+  @media only screen and (${device.laptopL}) {
+    gap: 32px;
   }
 `;
 
@@ -109,13 +122,19 @@ export const FormInputs = styled.div`
       width: 30%;
     }
   }
+
+  @media only screen and (${device.laptopL}) {
+    padding: 40px;
+  }
 `;
 
 export const FormPaymentTypeWrapper = styled.div`
   background-color: ${(props) => props.theme.baseCard};
   border-radius: 6px;
   padding: 20px;
+
   div#selectPaymentType {
+    margin-top: 32px;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -146,13 +165,54 @@ export const FormPaymentTypeWrapper = styled.div`
         }
       }
     }
+
+    @media only screen and (min-width: 1280px) {
+      flex-direction: row;
+      div {
+        width: 100%;
+        word-break: keep-all;
+        label {
+          padding: 16px 8px;
+        }
+      }
+    }
+
+    @media only screen and (${device.laptopL}) {
+      div {
+        label {
+          padding: 16px;
+        }
+      }
+    }
+  }
+
+  @media only screen and (${device.laptopL}) {
+    padding: 40px;
   }
 `;
 
 export const SelectedCoffeeWrapper = styled.div`
-  background-color: ${(props) => props.theme.baseCard};
+  h1 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    font-family: "Baloo 2";
+  }
+
+  @media only screen and (${device.laptop}) {
+    width: 41.2%;
+  }
+`;
+
+export const SelectedCoffeeContainer = styled.div`
+  border-radius: 6px 44px;
   padding: 0 20px 20px 20px;
-  border-radius: 6px;
+  /* border-radius: 6px; */
+
+  background-color: ${(props) => props.theme.baseCard};
+
+  @media only screen and (${device.laptopL}) {
+    padding: 0 40px 40px 40px;
+  }
 `;
 
 export const SelectedCoffeesList = styled.div`
@@ -170,6 +230,10 @@ export const SelectedCoffee = styled.div`
   img {
     width: 44px;
     margin-right: 20px;
+
+    @media only screen and (${device.laptop}) {
+      width: 3.5vw;
+    }
   }
 
   div:first-of-type {
