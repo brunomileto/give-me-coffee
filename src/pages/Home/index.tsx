@@ -2,9 +2,8 @@ import {
     Coffee, Minus, Package, Plus, ShoppingCart, ShoppingCartSimple, Timer
 } from 'phosphor-react';
 
-import americano from '../../assets/coffeeTypes/americano.svg';
 import HeroMainImg from '../../assets/Imagem.png';
-import { coffeesData } from '../../coffeesData';
+import { products } from '../../coffeesData';
 import {
     BuyCoffeeWrapper, CircleWithImg, CoffeBuyButton, CoffeeItem, CoffeesItems, CoffeesWrapper,
     CoffeeType, CoffeQuantityWrapper, CoffeValueWrapper, HeroContentItem, HeroContentItems,
@@ -55,10 +54,10 @@ export const Home = () => {
       <CoffeesWrapper>
         <h1>Nossos cafés</h1>
         <CoffeesItems>
-          {coffeesData.map((coffee) => {
+          {products.map((coffee) => {
             return (
               <CoffeeItem>
-                <img alt="" src={americano} />
+                <img alt="" src={coffee.image} />
                 <CoffeeType>
                   <span>{coffee.type}</span>
                 </CoffeeType>
