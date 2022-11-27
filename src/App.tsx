@@ -36,6 +36,7 @@ function App() {
       ...coffees.map((coffee) => {
         if (coffee.name === selectedProduct.name) {
           coffee.isSelected = false;
+          coffee.selectedQuantity = 0;
         }
         return coffee;
       }),

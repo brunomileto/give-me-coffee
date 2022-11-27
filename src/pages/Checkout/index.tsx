@@ -2,6 +2,7 @@ import {
     Bank, CreditCard, CurrencyDollar, IconProps, MapPinLine, Minus, Money, Plus, Trash
 } from 'phosphor-react';
 import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { SelectedCoffeesContext } from '../../App';
 import { Product } from '../../coffeesData';
@@ -32,13 +33,19 @@ const FormHeader = ({ title, subTitle, ImgComponent, imgColor }: FormHeaderProps
 };
 
 export const Checkout = () => {
-  const { coffees } = useContext(SelectedCoffeesContext);
+  const { coffees, removeCoffeeFromCart } = useContext(SelectedCoffeesContext);
   const [totalItemsValue, setTotalItemsValue] = useState<number>(0);
+  const navigate = useNavigate();
 
   const cartIsEmpty = coffees.filter((coffee) => coffee.isSelected === true).length === 0;
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    for (let coffeeIndex = 0; coffeeIndex < coffees.length; coffeeIndex++) {
+      const coffee = coffees[coffeeIndex];
+      removeCoffeeFromCart(coffee);
+    }
+    navigate("/success");
   }
 
   useEffect(() => {
