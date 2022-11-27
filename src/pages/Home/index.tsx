@@ -1,12 +1,9 @@
-import {
-    Coffee, Minus, Package, Plus, ShoppingCart, ShoppingCartSimple, Timer
-} from 'phosphor-react';
+import { Coffee, Package, ShoppingCartSimple, Timer } from 'phosphor-react';
 
 import HeroMainImg from '../../assets/Imagem.png';
-import { products } from '../../coffeesData';
+import { CoffeeCard } from '../../components/CoffeeCard';
 import {
-    BuyCoffeeWrapper, CircleWithImg, CoffeBuyButton, CoffeeItem, CoffeesItems, CoffeesWrapper,
-    CoffeeType, CoffeQuantityWrapper, CoffeValueWrapper, HeroContentItem, HeroContentItems,
+    CircleWithImg, CoffeesItems, CoffeesWrapper, HeroContentItem, HeroContentItems,
     HeroContentWrapper, HeroImg, HeroTitleWrapper, HeroWrapper
 } from './style';
 
@@ -17,10 +14,7 @@ export const Home = () => {
         <HeroContentWrapper>
           <HeroTitleWrapper>
             <h1>Encontre o café perfeito para qualquer hora do dia</h1>
-            <h3>
-              Com o Coffee Delivery você recebe seu café onde estiver, a
-              qualquer hora
-            </h3>
+            <h3>Com o Coffee Delivery você recebe seu café onde estiver, a qualquer hora</h3>
           </HeroTitleWrapper>
           <HeroContentItems>
             <HeroContentItem>
@@ -54,36 +48,7 @@ export const Home = () => {
       <CoffeesWrapper>
         <h1>Nossos cafés</h1>
         <CoffeesItems>
-          {products.map((coffee) => {
-            return (
-              <CoffeeItem>
-                <img alt="" src={coffee.image} />
-                <CoffeeType>
-                  <span>{coffee.type}</span>
-                </CoffeeType>
-                <h1>{coffee.name}</h1>
-                <p>{coffee.description}</p>
-                <BuyCoffeeWrapper>
-                  <CoffeValueWrapper>
-                    <span>R$ </span>
-                    <span>{coffee.value}</span>
-                  </CoffeValueWrapper>
-                  <CoffeQuantityWrapper>
-                    <div>
-                      <Minus />
-                    </div>
-                    <span>1</span>
-                    <div>
-                      <Plus />
-                    </div>
-                  </CoffeQuantityWrapper>
-                  <CoffeBuyButton>
-                    <ShoppingCart size={22} weight="fill" />
-                  </CoffeBuyButton>
-                </BuyCoffeeWrapper>
-              </CoffeeItem>
-            );
-          })}
+          <CoffeeCard />
         </CoffeesItems>
       </CoffeesWrapper>
     </>

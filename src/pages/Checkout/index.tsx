@@ -1,34 +1,27 @@
 import {
     Bank, CreditCard, CurrencyDollar, IconProps, MapPinLine, Minus, Money, Plus, Trash
 } from 'phosphor-react';
+import { useContext, useEffect, useState } from 'react';
 
-import americano from '../../assets/coffeeTypes/americano.svg';
+import { SelectedCoffeesContext } from '../../App';
+import { Product } from '../../coffeesData';
+import { CoffeesSelected } from '../../components/CoffeesSelected';
 import {
     CheckoutWrapper, Form, FormHeaderWrapper, FormInputs, FormInputsWrapper, FormPaymentTypeWrapper,
-    SelectedCoffee, SelectedCoffeeContainer, SelectedCoffeesList, SelectedCoffeesValues,
-    SelectedCoffeeWrapper, SubmitButton
+    SelectedCoffeeContainer, SelectedCoffeesList, SelectedCoffeesValues, SelectedCoffeeWrapper,
+    SubmitButton
 } from './styles';
 
 interface FormHeaderProps {
   title: string;
   subTitle: string;
   imgColor: "yellow" | "purple";
-  ImgComponent: React.ForwardRefExoticComponent<
-    IconProps & React.RefAttributes<SVGSVGElement>
-  >;
+  ImgComponent: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>;
 }
 
-const FormHeader = ({
-  title,
-  subTitle,
-  ImgComponent,
-  imgColor,
-}: FormHeaderProps) => {
+const FormHeader = ({ title, subTitle, ImgComponent, imgColor }: FormHeaderProps) => {
   return (
-    <FormHeaderWrapper
-      id={`formHeader${title.replace(" ", "")}`}
-      iconColor={imgColor}
-    >
+    <FormHeaderWrapper id={`formHeader${title.replace(" ", "")}`} iconColor={imgColor}>
       <ImgComponent size={22} />
       <div>
         <span>{title}</span>
@@ -38,39 +31,41 @@ const FormHeader = ({
   );
 };
 
-const CoffeeSelected = () => {
-  return (
-    <SelectedCoffee>
-      <img alt="" src={americano} />
-      <div>
-        <span>Expresso Tradicional</span>
-        <div>
-          <div>
-            <button>
-              <Minus />
-            </button>
-            <span>1</span>
-            <button>
-              <Plus />
-            </button>
-          </div>
-          <button id="btnRemoveItem">
-            <Trash />
-            <span>REMOVER</span>
-          </button>
-        </div>
-      </div>
-      <div id="itemValue">
-        <span>R$ 9,90</span>
-      </div>
-    </SelectedCoffee>
-  );
-};
-
 export const Checkout = () => {
+  const { coffees } = useContext(SelectedCoffeesContext);
+  const [totalItemsValue, setTotalItemsValue] = useState<number>(0);
+
+  const cartIsEmpty = coffees.filter((coffee) => coffee.isSelected === true).length === 0;
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+  }
+
+  useEffect(() => {
+    console.log("here");
+    const selectedCoffees = [
+      ...coffees.map((coffee) => {
+        if (coffee.isSelected) return coffee;
+      }),
+    ];
+
+    let total = 0;
+    console.log(selectedCoffees);
+    if (selectedCoffees !== undefined && selectedCoffees.length > 0) {
+      selectedCoffees!.forEach((selectedCoffee) => {
+        if (selectedCoffee !== undefined) {
+          total += selectedCoffee.value;
+        } else {
+        }
+      });
+    }
+    console.log("TOTAL", total);
+    setTotalItemsValue(total);
+  }, [coffees]);
+
   return (
     <CheckoutWrapper>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <FormInputsWrapper>
           <h1>Complete seu pedido</h1>
           <FormInputs id="formInputs">
@@ -83,16 +78,8 @@ export const Checkout = () => {
             <input id="cep" name="cep" placeholder="CEP" />
             <input id="address" name="address" placeholder="Rua" />
             <div id="numberComplement">
-              <input
-                id="addressNumber"
-                name="addressNumber"
-                placeholder="Número"
-              />
-              <input
-                id="addressComplement"
-                name="addressComplement"
-                placeholder="Complemento"
-              />
+              <input id="addressNumber" name="addressNumber" placeholder="Número" />
+              <input id="addressComplement" name="addressComplement" placeholder="Complemento" />
             </div>
             <div id="cityState">
               <input id="neigborhood" name="neigborhood" placeholder="Bairro" />
@@ -133,24 +120,25 @@ export const Checkout = () => {
           <h1>Cafés selecionados</h1>
           <SelectedCoffeeContainer>
             <SelectedCoffeesList>
-              <CoffeeSelected />
-              <CoffeeSelected />
+              <CoffeesSelected />
             </SelectedCoffeesList>
             <SelectedCoffeesValues>
               <div id="totalItens">
                 <span>Total dos itens</span>
-                <span>R$29,70</span>
+                <span>{`R$ ${totalItemsValue}`}</span>
               </div>
               <div id="deliverTax">
                 <span>Entrega</span>
-                <span>R$3,50</span>
+                <span>{cartIsEmpty ? "R$ 0,00" : "R$ 3,50"}</span>
               </div>
               <div id="total">
                 <span>Total</span>
-                <span>R$33,20</span>
+                <span>{cartIsEmpty ? "R$ 0,00" : `R$ ${totalItemsValue + 3.5}`}</span>
               </div>
             </SelectedCoffeesValues>
-            <SubmitButton type="submit">CONFIRMAR PEDIDO</SubmitButton>
+            <SubmitButton disabled={cartIsEmpty} type="submit">
+              CONFIRMAR PEDIDO
+            </SubmitButton>
           </SelectedCoffeeContainer>
         </SelectedCoffeeWrapper>
       </Form>

@@ -29,6 +29,8 @@ export type Product = {
   type: coffeeTypes[];
   value: number;
   image: string;
+  selectedQuantity: number;
+  isSelected: boolean;
 };
 
 export const products: Product[] = [
@@ -38,6 +40,8 @@ export const products: Product[] = [
     image: expresso,
     type: [coffeeTypes.TRADICIONAL],
     value: 9.9,
+    selectedQuantity: 0,
+    isSelected: false,
   },
   {
     description: "Expresso diluído, menos intenso que o tradicional",
@@ -45,6 +49,8 @@ export const products: Product[] = [
     image: americano,
     type: [coffeeTypes.TRADICIONAL],
     value: 9.9,
+    selectedQuantity: 0,
+    isSelected: false,
   },
   {
     description: "Café expresso tradicional com espuma cremosa",
@@ -52,6 +58,8 @@ export const products: Product[] = [
     image: expressoCremoso,
     type: [coffeeTypes.TRADICIONAL],
     value: 9.9,
+    selectedQuantity: 0,
+    isSelected: false,
   },
   {
     description: "Bebida preparada com café expresso e cubos de gelo",
@@ -59,6 +67,8 @@ export const products: Product[] = [
     image: cafeGelado,
     type: [coffeeTypes.TRADICIONAL, coffeeTypes.GELADO],
     value: 9.9,
+    selectedQuantity: 0,
+    isSelected: false,
   },
   {
     description: "Meio a meio de expresso tradicional com leite vaporizado",
@@ -66,6 +76,8 @@ export const products: Product[] = [
     image: cafeComLeite,
     type: [coffeeTypes.TRADICIONAL, coffeeTypes.COM_LEITE],
     value: 9.9,
+    selectedQuantity: 0,
+    isSelected: false,
   },
   {
     description:
@@ -74,6 +86,8 @@ export const products: Product[] = [
     image: latte,
     type: [coffeeTypes.TRADICIONAL, coffeeTypes.COM_LEITE],
     value: 9.9,
+    selectedQuantity: 0,
+    isSelected: false,
   },
   {
     description:
@@ -82,6 +96,8 @@ export const products: Product[] = [
     image: capuccino,
     type: [coffeeTypes.TRADICIONAL, coffeeTypes.COM_LEITE],
     value: 9.9,
+    selectedQuantity: 0,
+    isSelected: false,
   },
   {
     description:
@@ -90,6 +106,8 @@ export const products: Product[] = [
     image: macchiato,
     type: [coffeeTypes.TRADICIONAL, coffeeTypes.COM_LEITE],
     value: 9.9,
+    selectedQuantity: 0,
+    isSelected: false,
   },
   {
     description: "Café expresso com calda de chocolate, pouco leite e espuma",
@@ -97,6 +115,8 @@ export const products: Product[] = [
     image: mochaccino,
     type: [coffeeTypes.TRADICIONAL, coffeeTypes.COM_LEITE],
     value: 9.9,
+    selectedQuantity: 0,
+    isSelected: false,
   },
   {
     description: "Bebida feita com chocolate dissolvido no leite quente e café",
@@ -104,6 +124,8 @@ export const products: Product[] = [
     image: chocolateQuente,
     type: [coffeeTypes.ESPECIAL, coffeeTypes.COM_LEITE],
     value: 9.9,
+    selectedQuantity: 0,
+    isSelected: false,
   },
   {
     description:
@@ -112,6 +134,8 @@ export const products: Product[] = [
     image: cubano,
     type: [coffeeTypes.ESPECIAL, coffeeTypes.ALCOOLICO, coffeeTypes.GELADO],
     value: 9.9,
+    selectedQuantity: 0,
+    isSelected: false,
   },
   {
     description: "Bebida adocicada preparada com café e leite de coco",
@@ -119,6 +143,8 @@ export const products: Product[] = [
     image: havaiano,
     type: [coffeeTypes.ESPECIAL],
     value: 9.9,
+    selectedQuantity: 0,
+    isSelected: false,
   },
   {
     description: "Bebida preparada com grãos de café árabe e especiarias",
@@ -126,6 +152,8 @@ export const products: Product[] = [
     image: arabe,
     type: [coffeeTypes.ESPECIAL],
     value: 9.9,
+    selectedQuantity: 0,
+    isSelected: false,
   },
   {
     description: "Bebida a base de café, uísque irlandês, açúcar e chantilly",
@@ -133,5 +161,7 @@ export const products: Product[] = [
     image: irlandes,
     type: [coffeeTypes.ALCOOLICO, coffeeTypes.ESPECIAL],
     value: 9.9,
+    selectedQuantity: 0,
+    isSelected: false,
   },
 ];
