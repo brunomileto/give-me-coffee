@@ -1,81 +1,125 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import backgroundImage from "../../assets/Background.png";
+import { device } from '../../styles/themes/default';
 
-export const HomeContainer = styled.main`
-  overflow: visible;
-`;
-
-export const MainContainer = styled.main`
+export const HeroWrapper = styled.main`
+  padding: 46px 0 46px 0;
   display: flex;
-  justify-content: space-between;
-
-  padding-top: 94px;
-  overflow: visible;
+  align-items: top;
+  gap: 25px;
+  @media only screen and (${device.laptopL}) {
+    gap: 30px;
+  }
 `;
 
-export const ContentContainer = styled.div`
+export const HeroImg = styled.img`
+  display: none;
+  @media only screen and (${device.laptop}) {
+    margin-top: 30px;
+    display: block;
+    width: 300px;
+    height: 200px;
+  }
+  @media only screen and (${device.laptopL}) {
+    margin-top: 0px;
+    width: 476px;
+    height: 360px;
+  }
+`;
+
+export const HeroContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 66px;
+  gap: 30px;
+  @media only screen and (${device.tablet}) {
+    gap: 66px;
+  }
 `;
 
-export const TitleContainer = styled.div`
+export const HeroTitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 22px;
 
   h1 {
     font-family: "Baloo 2";
-    font-size: 48px;
+    font-size: 42px;
     line-height: 130%;
     color: ${(props) => props.theme.baseTitle};
+    @media only screen and (${device.laptopL}) {
+      font-size: 48px;
+    }
   }
-  span {
+
+  h3 {
     font-size: 20px;
+    line-height: 130%;
     color: ${(props) => props.theme.baseSubtitle};
   }
 `;
 
-export const ItemsContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  row-gap: 20px;
+export const HeroContentItems = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @media only screen and (${device.laptop}) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 20px;
+  } ;
 `;
 
-const ITEM_COLOR = {
-  orange: "yellowDark",
-  yellow: "yellow",
-  gray: "baseText",
-  blue: "purple",
-} as const;
-
-interface ItemContainerProps {
-  itemColor: keyof typeof ITEM_COLOR;
+interface CircleWithImgProps {
+  color: "darkYellow" | "yellow" | "gray" | "purple";
 }
 
-export const ItemContainer = styled.div<ItemContainerProps>`
+export const CircleWithImg = styled.div<CircleWithImgProps>`
   display: flex;
-  align-items: center;
+  padding: 8px;
+  color: white;
+  background-color: ${(props) =>
+    props.color === "darkYellow"
+      ? props.theme.yellowDark
+      : props.color === "yellow"
+      ? props.theme.yellow
+      : props.color === "gray"
+      ? props.theme.baseText
+      : props.theme.purple};
+  border-radius: 999px;
+`;
 
+export const HeroContentItem = styled.div`
+  display: flex;
   gap: 12px;
-  div {
-    display: flex;
-    border-radius: 9999px;
-    padding: 8px;
-    background-color: ${(props) => props.theme[ITEM_COLOR[props.itemColor]]};
+  align-items: center;
+  color: ${(props) => props.theme.baseText};
+`;
+
+export const CoffeesWrapper = styled.div`
+  margin-top: 20px;
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
+  align-items: center;
+  h1 {
+    font-family: "Baloo 2";
+    width: 100%;
+    font-size: 32px;
+    color: ${(props) => props.theme.baseSubtitle};
   }
 `;
 
-export const ProductsSectionContainer = styled.div`
+export const CoffeesItems = styled.div`
+  padding-top: 20px;
+  width: fit-content;
   display: flex;
-  flex-direction: column;
-  gap: 54px;
-`;
-export const ProductsContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  column-gap: 32px;
-  row-gap: 40px;
+  justify-content: center;
+  overflow-x: hidden;
+  flex-wrap: wrap;
+  gap: 40px 32px;
+
+  @media only screen and (${device.laptopL}) {
+    justify-content: start;
+  }
 `;

@@ -1,31 +1,43 @@
-import { MapPin, ShoppingCart } from "phosphor-react";
-import { NavLink } from "react-router-dom";
+import { MapPin, ShoppingCart } from 'phosphor-react';
+import { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 
-import Logo from "../../assets/Logo.svg";
+import { SelectedCoffeesContext } from '../../App';
+import LogoImg from '../../assets/Logo.svg';
 import {
-  CartContainer,
-  HeaderContainer,
-  LocationContainer,
-  NavContainer,
-} from "./styles";
+    HeaderWrapper, LogoImage, MapPimColor, NavItemCart, NavItemLocation, NavItems
+} from './styles';
 
-export function Header() {
+export const Header = () => {
+  const { coffees } = useContext(SelectedCoffeesContext);
+  const cartHasItems =
+    coffees.filter((coffee) => coffee.isSelected === true).length > 0;
   return (
-    <HeaderContainer id="header-container">
+    <HeaderWrapper>
       <NavLink to="/">
-        <img src={Logo} alt="" />
+        <LogoImage alt="" src={LogoImg} />
       </NavLink>
-      <NavContainer id="nav-container">
-        <LocationContainer>
-          <MapPin weight="fill" size={22} color={"#8047F8"} />
-          <span>Porto Alegre, RS</span>
-        </LocationContainer>
-        <CartContainer>
+      <NavItems>
+        <NavLink to="/">
+          <NavItemLocation>
+            <MapPimColor>
+              <MapPin size={22} weight="fill" />
+            </MapPimColor>
+            <span>Porto Alegre, RS</span>
+          </NavItemLocation>
+        </NavLink>
+        {cartHasItems ? (
           <NavLink to="/checkout">
-            <ShoppingCart weight="fill" size={22} color={"#DBAC2C"} />
+            <NavItemCart>
+              <ShoppingCart size={22} weight="fill" />
+            </NavItemCart>
           </NavLink>
-        </CartContainer>
-      </NavContainer>
-    </HeaderContainer>
+        ) : (
+          <NavItemCart>
+            <ShoppingCart size={22} weight="fill" />
+          </NavItemCart>
+        )}
+      </NavItems>
+    </HeaderWrapper>
   );
-}
+};

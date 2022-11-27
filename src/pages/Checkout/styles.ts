@@ -1,165 +1,258 @@
-import styled from "styled-components";
+import { IconProps } from 'phosphor-react';
+import styled from 'styled-components';
+import { boolean } from 'zod';
 
-export const FormContainer = styled.form`
+import { device } from '../../styles/themes/default';
+
+export const CheckoutWrapper = styled.main``;
+
+export const FormInputsWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-top: 40px;
+  flex-direction: column;
+  gap: 12px;
+  @media only screen and (${device.laptop}) {
+    width: 58.8%;
+  }
 `;
 
-export const FullFillRequestContainer = styled.div`
-  max-width: 640px;
-  flex-grow: 1;
-  width: fit-content;
-
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
-
-  & > div:first-of-type,
-  & > div:last-of-type {
-  }
-  & > h1:first-of-type {
-    font-family: "Baloo 2";
+  h1 {
     font-size: 18px;
-    color: ${(props) => props.theme.baseSubtitle};
-    font-weight: bold;
+    font-family: "Baloo 2";
   }
 
-  header {
-    display: flex;
-    align-items: stretch;
-    gap: 8px;
-    h1 {
-      font-size: 16px;
-      font-weight: bold;
-      line-height: 130%;
-    }
-    span {
-      font-size: 14px;
-      font-weight: normal;
-      line-height: 130%;
-    }
+  @media only screen and (${device.laptop}) {
+    flex-direction: row;
+  }
+
+  @media only screen and (${device.laptopL}) {
+    gap: 32px;
   }
 `;
 
-const FullFillRequestChildBaseContainer = styled.div`
+interface FormHeaderProps {
+  iconColor: "yellow" | "purple";
+}
+
+export const FormHeaderWrapper = styled.div<FormHeaderProps>`
   display: flex;
-  flex-direction: column;
-  gap: 32px;
+  align-items: stretch;
+  gap: 8px;
+  margin-bottom: 16px;
 
-  border-radius: 6px;
-  padding: 40px;
-  background-color: ${(props) => props.theme.baseCard};
-`;
+  color: ${(props) => (props.iconColor === "yellow" ? props.theme.yellowDark : props.theme.purple)};
 
-export const AddressContainer = styled(FullFillRequestChildBaseContainer)`
-  & > div:first-of-type {
+  div {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    width: 100%;
-    div {
-      display: flex;
-      flex-direction: row;
-      gap: 12px;
+    gap: 2px;
+    span {
+      font-size: 14px;
+      line-height: 130%;
+      color: ${(props) => props.theme.baseText};
+    }
+    span:first-of-type {
+      font-size: 16px;
+      color: ${(props) => props.theme.baseSubtitle};
     }
   }
 `;
-
-export const BasicInput = styled.input`
-  width: 200px;
-  padding: 12px;
-  border: 1px;
-  border-color: ${(props) => props.theme.baseButton};
-  background-color: ${(props) => props.theme.baseInput};
+export const FormInputs = styled.div`
+  background-color: ${(props) => props.theme.baseCard};
   border-radius: 6px;
-  color: ${(props) => props.theme.baseLabel};
-`;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 16px;
+  padding: 20px;
 
-export const ShortInput = styled(BasicInput)`
-  width: 60px;
-`;
-
-export const LongInput = styled(BasicInput)`
-  width: 100%;
-`;
-
-export const PaymentContainer = styled(FullFillRequestChildBaseContainer)`
-  :focus {
-    border: 0px;
-    border-color: transparent;
+  input {
+    border-style: solid;
+    border-radius: 4px;
+    padding: 12px;
+    background-color: ${(props) => props.theme.baseInput};
+    border-right-color: ${(props) => props.theme.baseButton};
+    border-top-color: ${(props) => props.theme.baseButton};
+    border-bottom-color: ${(props) => props.theme.baseButton};
+    border-left-color: ${(props) => props.theme.baseButton};
+    border-width: 1px;
     outline: none;
+    outline-color: transparent;
+    color: ${(props) => props.theme.baseText};
+    text-decoration-color: transparent;
+
+    ::placeholder,
+    ::-webkit-input-placeholder {
+      color: ${(props) => props.theme.baseLabel};
+    }
   }
-  & > div:nth-child(2) {
+
+  input#cep {
+    width: 50%;
+  }
+
+  div#numberComplement {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
     gap: 12px;
-    border-color: transparent;
-    :focus {
-      border: 0px;
-      border-color: transparent;
-      outline: none;
-    }
-  }
-
-  div > div {
-    width: 100%;
-    height: 51px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    :focus {
-      border: 0px;
-      border-color: transparent;
-      outline: none;
-    }
-
-    label {
-      :active,
-      :checked,
-      :focus {
-        border: 0px;
-        border-color: transparent;
-        outline: none;
-      }
-      border-color: red;
-      border-radius: 6px;
-      border: 0px;
+    input {
       width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: start;
-      align-items: center;
-      gap: 12px;
-      padding-left: 12px;
-      background: ${(props) => props.theme.baseButton};
+    }
+
+    input#addressNumber {
+      width: 40%;
+    }
+  }
+
+  div#cityState {
+    display: flex;
+    gap: 12px;
+    justify-content: baseline;
+    input {
+      width: 100%;
+    }
+
+    input#neigborhood {
+      width: 58%;
+    }
+
+    input#state {
+      width: 30%;
+    }
+  }
+
+  @media only screen and (${device.laptopL}) {
+    padding: 40px;
+  }
+`;
+
+export const FormPaymentTypeWrapper = styled.div`
+  background-color: ${(props) => props.theme.baseCard};
+  border-radius: 6px;
+  padding: 20px;
+
+  div#selectPaymentType {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    div {
+      label {
+        border-radius: 6px;
+        padding: 16px;
+        font-size: 12px;
+        color: ${(props) => props.theme.purple};
+        background-color: ${(props) => props.theme.baseButton};
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        border-width: 2px;
+        border-color: transparent;
+        border-style: solid;
+        color: ${(props) => props.theme.purple};
+        span {
+          color: ${(props) => props.theme.baseText};
+        }
+      }
+      input {
+        display: none;
+        :checked + label {
+          background-color: ${(props) => props.theme.purpleLight};
+          border-color: ${(props) => props.theme.purple};
+        }
+      }
+    }
+
+    @media only screen and (min-width: 1280px) {
+      flex-direction: row;
+      div {
+        width: 100%;
+        word-break: keep-all;
+        label {
+          padding: 16px 8px;
+        }
+      }
+    }
+
+    @media only screen and (${device.laptopL}) {
+      div {
+        label {
+          padding: 16px;
+        }
+      }
+    }
+  }
+
+  @media only screen and (${device.laptopL}) {
+    padding: 40px;
+  }
+`;
+
+export const SelectedCoffeeWrapper = styled.div`
+  h1 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    font-family: "Baloo 2";
+  }
+
+  @media only screen and (${device.laptop}) {
+    width: 41.2%;
+  }
+`;
+
+export const SelectedCoffeeContainer = styled.div`
+  border-radius: 6px 44px;
+  padding: 0 20px 20px 20px;
+  /* border-radius: 6px; */
+
+  background-color: ${(props) => props.theme.baseCard};
+
+  @media only screen and (${device.laptopL}) {
+    padding: 0 40px 40px 40px;
+  }
+`;
+
+export const SelectedCoffeesList = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+export const SelectedCoffeesValues = styled.div`
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  div {
+    display: flex;
+    justify-content: space-between;
+    span {
+      font-size: 16px;
+      color: ${(props) => props.theme.baseSubtitle};
+    }
+  }
+
+  div#total {
+    span {
+      font-size: 20px;
+      font-weight: 700;
     }
   }
 `;
 
-export const RadioButton = styled.input`
-  -webkit-appearance: none;
-  appearance: none;
+export const SubmitButton = styled.button`
+  margin-top: 24px;
+  border-width: 0px;
   width: 100%;
-  height: 100%;
-  position: absolute;
-  border: 2px solid transparent;
-  :hover {
+  padding: 12px 0;
+  background-color: ${(props) => props.theme.yellow};
+  border-radius: 6px;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  :disabled {
+    opacity: 60%;
   }
-  :focus {
-    outline: none;
-    box-shadow: 0 0 0 2px ${(props) => props.theme.baseHover};
-  }
-  :checked {
-    border: 2px solid ${(props) => props.theme.purple};
-  }
-`;
-
-export const SelectedCoffeesContainer = styled.div`
-  width: fit-content;
-  background-color: red;
 `;

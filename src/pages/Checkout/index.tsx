@@ -1,119 +1,154 @@
 import {
-  Bank,
-  CreditCard,
-  CurrencyDollar,
-  MapPin,
-  Money,
-} from "phosphor-react";
-import { defaultTheme } from "../../styles/themes/default";
-import {
-  AddressContainer,
-  BasicInput,
-  FormContainer,
-  FullFillRequestContainer,
-  LongInput,
-  PaymentContainer,
-  RadioButton,
-  SelectedCoffeesContainer,
-  ShortInput,
-} from "./styles";
+    Bank, CreditCard, CurrencyDollar, IconProps, MapPinLine, Minus, Money, Plus, Trash
+} from 'phosphor-react';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export function Checkout() {
-  return (
-    <div>
-      <FormContainer>
-        <FullFillRequestContainer id="fullfill-request">
-          <h1>Complete seu pedido</h1>
-          <AddressContainer id="address">
-            <header>
-              <MapPin size={22} color={defaultTheme.yellowDark} />
-              <div>
-                <h1>Endereço de Entrega</h1>
-                <span>Informe o endereço onde deseja receber seu pedido</span>
-              </div>
-            </header>
-            <div>
-              <div>
-                <BasicInput placeholder="CEP" />
-              </div>
-              <div>
-                <LongInput placeholder="Rua" />
-              </div>
-              <div>
-                <BasicInput placeholder="Número" />
-                <LongInput placeholder="Complemento" />
-              </div>
-              <div>
-                <BasicInput placeholder="Bairro" />
-                <LongInput placeholder="Cidade" />
-                <ShortInput placeholder="UF" />
-              </div>
-            </div>
-          </AddressContainer>
-          <PaymentContainer id="payment">
-            <header>
-              <CurrencyDollar size={22} color={defaultTheme.purpleDark} />
-              <div>
-                <h1>Pagamento</h1>
-                <span>
-                  O pagamento é feito na entrega. Escolha a forma que deseja
-                  pagar
-                </span>
-              </div>
-            </header>
-            <div id="paymentTypeContainer">
-              <div>
-                <label htmlFor="credit">
-                  <CreditCard size={16} color={defaultTheme.purple} />
-                  <span>Cartão de Crédito</span>
-                </label>
-                <RadioButton id="credit" type="radio" name="paymentType" />
-              </div>
-              <div>
-                <label htmlFor="debit">
-                  <Bank size={16} color={defaultTheme.purple} />
-                  <span>Cartão de Débito</span>
-                </label>
-                <RadioButton id="debit" type="radio" name="paymentType" />
-              </div>
-              <div>
-                <label htmlFor="money">
-                  <Money size={16} color={defaultTheme.purple} />
-                  <span>Dinheiro</span>
-                </label>
-                <RadioButton id="money" type="radio" name="paymentType" />
-              </div>
-            </div>
-          </PaymentContainer>
-        </FullFillRequestContainer>
-        <SelectedCoffeesContainer id="selected-coffees">
-          <h1>Cafés selecionados</h1>
-          <div>
-            <div id="selected-coffees-list">
-              <div id="selected-coffee1"></div>
-              <div id="selected-coffee2"></div>
-              <div id="selected-coffee3"></div>
-            </div>
-            <div id="values">
-              <div>
-                <div>
-                  <span>Total de itens</span>
-                  <h2>R$29,70</h2>
-                </div>
-                <div>
-                  <span>Entrega</span>
-                  <h2>3,50</h2>
-                </div>
-              </div>
-              <div>
-                <span>Total</span>
-                <h2>R$32,20</h2>
-              </div>
-            </div>
-            <button type="submit">CONFIRMAR PEDIDO</button>
-          </div>
-        </SelectedCoffeesContainer>
-      </FormContainer>
-    </div>
-  );
+import { SelectedCoffeesContext } from '../../App';
+import { Product } from '../../coffeesData';
+import { CoffeesSelected } from '../../components/CoffeesSelected';
+import {
+    CheckoutWrapper, Form, FormHeaderWrapper, FormInputs, FormInputsWrapper, FormPaymentTypeWrapper,
+    SelectedCoffeeContainer, SelectedCoffeesList, SelectedCoffeesValues, SelectedCoffeeWrapper,
+    SubmitButton
+} from './styles';
+
+interface FormHeaderProps {
+  title: string;
+  subTitle: string;
+  imgColor: "yellow" | "purple";
+  ImgComponent: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>;
 }
+
+const FormHeader = ({ title, subTitle, ImgComponent, imgColor }: FormHeaderProps) => {
+  return (
+    <FormHeaderWrapper id={`formHeader${title.replace(" ", "")}`} iconColor={imgColor}>
+      <ImgComponent size={22} />
+      <div>
+        <span>{title}</span>
+        <span>{subTitle}</span>
+      </div>
+    </FormHeaderWrapper>
+  );
+};
+
+export const Checkout = () => {
+  const { coffees, removeCoffeeFromCart } = useContext(SelectedCoffeesContext);
+  const [totalItemsValue, setTotalItemsValue] = useState<number>(0);
+  const navigate = useNavigate();
+
+  const cartIsEmpty = coffees.filter((coffee) => coffee.isSelected === true).length === 0;
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    for (let coffeeIndex = 0; coffeeIndex < coffees.length; coffeeIndex++) {
+      const coffee = coffees[coffeeIndex];
+      removeCoffeeFromCart(coffee);
+    }
+    navigate("/success");
+  }
+
+  useEffect(() => {
+    console.log("here");
+    const selectedCoffees = [
+      ...coffees.map((coffee) => {
+        if (coffee.isSelected) return coffee;
+      }),
+    ];
+
+    let total = 0;
+    console.log(selectedCoffees);
+    if (selectedCoffees !== undefined && selectedCoffees.length > 0) {
+      selectedCoffees!.forEach((selectedCoffee) => {
+        if (selectedCoffee !== undefined) {
+          total += selectedCoffee.value;
+        } else {
+        }
+      });
+    }
+    console.log("TOTAL", total);
+    setTotalItemsValue(total);
+  }, [coffees]);
+
+  return (
+    <CheckoutWrapper>
+      <Form onSubmit={handleSubmit}>
+        <FormInputsWrapper>
+          <h1>Complete seu pedido</h1>
+          <FormInputs id="formInputs">
+            <FormHeader
+              title="Endereço de Entrega"
+              subTitle="Informe o endereço onde deseja receber seu pedido"
+              ImgComponent={MapPinLine}
+              imgColor="yellow"
+            />
+            <input id="cep" name="cep" placeholder="CEP" />
+            <input id="address" name="address" placeholder="Rua" />
+            <div id="numberComplement">
+              <input id="addressNumber" name="addressNumber" placeholder="Número" />
+              <input id="addressComplement" name="addressComplement" placeholder="Complemento" />
+            </div>
+            <div id="cityState">
+              <input id="neigborhood" name="neigborhood" placeholder="Bairro" />
+              <input id="city" name="city" placeholder="Cidade" />
+              <input id="state" name="state" placeholder="UF" />
+            </div>
+          </FormInputs>
+          <FormPaymentTypeWrapper id="formPaymentType">
+            <FormHeader
+              title="Pagamento"
+              subTitle="O pagamento é feito na entrega. Escolha a forma que deseja pagar"
+              ImgComponent={CurrencyDollar}
+              imgColor="purple"
+            />
+            <div id="selectPaymentType">
+              <div>
+                <input type="radio" id="credit" name="paymentType" />
+                <label htmlFor="credit">
+                  <CreditCard /> <span>CARTÃO DE CRÉDITO</span>
+                </label>
+              </div>
+              <div>
+                <input type="radio" id="debit" name="paymentType" />
+                <label htmlFor="debit">
+                  <Bank /> <span>CARTÃO DE DÉBITO</span>
+                </label>
+              </div>
+              <div>
+                <input type="radio" id="money" name="paymentType" />
+                <label htmlFor="money">
+                  <Money /> <span>DINHEIRO</span>
+                </label>
+              </div>
+            </div>
+          </FormPaymentTypeWrapper>
+        </FormInputsWrapper>
+        <SelectedCoffeeWrapper>
+          <h1>Cafés selecionados</h1>
+          <SelectedCoffeeContainer>
+            <SelectedCoffeesList>
+              <CoffeesSelected />
+            </SelectedCoffeesList>
+            <SelectedCoffeesValues>
+              <div id="totalItens">
+                <span>Total dos itens</span>
+                <span>{`R$ ${totalItemsValue}`}</span>
+              </div>
+              <div id="deliverTax">
+                <span>Entrega</span>
+                <span>{cartIsEmpty ? "R$ 0,00" : "R$ 3,50"}</span>
+              </div>
+              <div id="total">
+                <span>Total</span>
+                <span>{cartIsEmpty ? "R$ 0,00" : `R$ ${totalItemsValue + 3.5}`}</span>
+              </div>
+            </SelectedCoffeesValues>
+            <SubmitButton disabled={cartIsEmpty} type="submit">
+              CONFIRMAR PEDIDO
+            </SubmitButton>
+          </SelectedCoffeeContainer>
+        </SelectedCoffeeWrapper>
+      </Form>
+    </CheckoutWrapper>
+  );
+};
